@@ -15,6 +15,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface HistoryRepository extends JpaRepository<History, Integer>  {
     
     
-    List<History> findByUserid(User user);
+    public List<History> findByuserid(int id);
+
+    
     
 }

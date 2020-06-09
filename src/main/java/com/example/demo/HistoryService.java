@@ -5,6 +5,7 @@
  */
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,20 @@ public class HistoryService {
     @Autowired
      private HistoryRepository repo;       
     
-    public List<History> findUserTask(User user) {
+//    public List<History> findUserhis(User user) {
+//    
+//        return  repo.findByUserid(user);
+//    }
     
-        return  repo.findByUserid(user);
+    public List<History> getAllHistory(int id){
+    
+//        return repo.findAll();
+
+        List<History> history = new ArrayList<>();
+        
+        
+        return repo.findByuserid(id);
+                
     }
 
     

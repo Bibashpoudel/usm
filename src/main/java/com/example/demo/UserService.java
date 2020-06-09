@@ -156,6 +156,11 @@ public class UserService implements UserDetailsService {
     
     }
 
+    public long countuser() {
+        
+        return repo.count();
+    }
+
     
     
     

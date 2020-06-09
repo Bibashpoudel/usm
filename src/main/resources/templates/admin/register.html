@@ -33,7 +33,10 @@ and open the template in the editor.
                           <a class="nav-link " href="/register">create User</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link " href="/admin/register">create Admin</a>
+                          <a class="nav-link " href="/registeradmin">create Admin</a>
+                        </li>
+                        <li class="nav-item">
+                      <a class="nav-link " href="/admin/listhistory">History</a>
                         </li>
                       </ul>
                       <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
@@ -45,7 +48,7 @@ and open the template in the editor.
             <div style="width:600px;margin-left:auto;margin-right:auto;margin-top:10rem;padding:24px;background-color:lightgrey;
                  border-radius:1rem">
                 <div card="card-block">
-                    <form th:action="@{/saveadmin}" method ="post">
+                    <form th:action="@{/admin/saveadmin}" method ="post">
         <!--                <div th:if="${parm.error}">
                                 invalid Username
                         </div> 

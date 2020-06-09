@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -31,20 +31,23 @@ and open the template in the editor.
 
                   
                   </ul>
-                  <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
-                   
+                  <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">        
                     <button class="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Logout</button>
                   </form>
                 </div>
             </nav>
-            <div class="card" style="width: 25rem;margin-left:auto;margin-right:auto;" th:each="history: ${history}">
+<!--                <span th:text="${#authentication.getPrincipal().getUsername()}"></span>-->
+            <div class="card" style="width: 25rem;margin-left:auto;margin-right:auto;" th:each="user: ${user}">
                 <div class="card-body">
-                  <h5 class="card-title" th:text="${history.id}">User Id</h5>
-                  <h6 class="card-subtitle mb-2 text-muted" th:text="${history.created_date}">Date</h6>
-                  <h6 class="card-subtitle mb-2 text-muted" th:text="${history.desc}">desc</h6>
-                  <a th:href="@{'/edituser/' + ${user.id}}" class="card-link">Edit User</a>
+                  <h5 class="card-title" th:text="${user.id}">User Id</h5>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${user.username}">username</h6>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${user.firstname}">first name</h6>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${user.lastname}">lastname</h6>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${user.contact}">contact</h6>
+                  
+<!--                  <a th:href="@{'/edituser/' + ${user.id}}" class="card-link">Edit User</a>
                   <a th:href="@{'/deleteuser/' + ${user.id}}" class="card-link">Delete User</a>
-                  <a th:href="@{'/changePassword/' + ${user.id}}" class="card-link">change password</a>
+                  <a th:href="@{'/changePassword/' + ${user.id}}" class="card-link">change password</a>-->
 
 
                 </div>

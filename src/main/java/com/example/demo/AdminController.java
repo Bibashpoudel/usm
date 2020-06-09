@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -28,70 +30,67 @@ public class AdminController {
     private UserService service;
     
     
+    @Autowired
+    private HistoryService htrservice;
+    
+    
     @GetMapping("")
     public String home(){
         return "admin/dashboard";
     
     
     }
+    //list user
+    
     
     @GetMapping("/listUser")
     public String UserList(Model model, HttpServletRequest request, String username){
         
        
          List<User> listUser = service.ListUser();
-        
-        
-        
-        
-        
+         
         model.addAttribute ("listUser", listUser);
         
-//        try{
-//            User user = service.findByusername(username);
-//
-//
-//            if(user.isActive() == true){
-//
-//                request.setAttribute("message" ,"block");
-//                
-//
-//            }
-//            else{
-//                request.setAttribute("message" ,"Active");
-//            }
-       
-        
-        
-//        }catch(Exception e){
-//            System.out.println("e");
-//        }
-        
-        
-        
-       
+        model.addAttribute("counts", service.countuser());
+  
         return "admin/userlist";
     
     }
-    @RequestMapping("/register")
-    public String Registeradminpage(Model model){
-        User user = new User();
+    
+//    //list history
+//     @GetMapping("/listhistory")
+//    public String Userhistory(Model model, HttpServletRequest request, String username){
+//        
+//       
+//         List<History> listhistory = htrservice.listhistory();
+//         
+//        model.addAttribute ("listhistory ", listhistory );
+//  
+//        return "admin/history";
+//    
+//    }
+    
+    //registration for admin
+    
+    
+    //edit user
+    @RequestMapping("/edituser/{id}")
+    public ModelAndView Editpage(@PathVariable(name ="id")int id){
         
-        model.addAttribute("user", user);
+        ModelAndView  mv = new ModelAndView("edit");
         
-        return "admin/register";
+        User user = service.get(id);
+        mv.addObject("user", user);
+        
+        return mv;
+        
+        
     }
-    @RequestMapping(value = "/saveadmin", method = RequestMethod.POST)
-    public String Registeradmin(@ModelAttribute("user") User user){
-       
+    //deleting user
+    @RequestMapping("/deleteuser/{id}")
+    public String DeleteUser(@PathVariable(name = "id")int id){
+        service.Delete(id);
         
-        
-        
-        
-        service.CreateAdmin(user);
-        
-        
-        
-        return "redirect:/";
+        return "redirect:/admin/listUser";
     }
 }

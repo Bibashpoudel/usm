@@ -25,7 +25,7 @@ public class DemoApplication implements CommandLineRunner {
         User user = new User();
         
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setId(10);
+        user.setId(1);
         user.setUsername("admin");
         user.setPassword(encoder.encode("admin123"));
         user.setRoles("ROLE_ADMIN");

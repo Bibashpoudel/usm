@@ -33,7 +33,10 @@ and open the template in the editor.
                       <a class="nav-link " href="/register">create User</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link " href="/admin/register">create Admin</a>
+                      <a class="nav-link " href="/registeradmin">create Admin</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link " href="/admin/listhistory">History</a>
                     </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
@@ -46,8 +49,9 @@ and open the template in the editor.
                 <div class="card-body">
                   <h5 class="card-title" th:text="${user.id}">User Id</h5>
                   <h6 class="card-subtitle mb-2 text-muted" th:text="${user.username}">UserName</h6>
-                  <a th:href="@{'/edituser/' + ${user.id}}" class="card-link">Edit User</a>
-                  <a th:href="@{'/deleteuser/' + ${user.id}}" class="card-link">Delete User</a>
+                  <a th:href="@{'/admin/edituser/' + ${user.id}}" class="card-link">Edit User</a>
+                  <a th:href="@{'/admin/deleteuser/' + ${user.id}}" class="card-link">Delete User</a>
+                  <a th:href="@{'/admin/history/' + ${user.id}}" class="card-link">User History</a>
                   <a th:href="@{'/changePassword/' + ${user.id}}" class="card-link">change password</a>
 
 

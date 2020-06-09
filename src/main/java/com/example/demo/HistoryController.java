@@ -5,11 +5,12 @@
  */
 package com.example.demo;
 
-import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -17,24 +18,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author bibash
  */
 @Controller
-public class profilecontroller {
+public class HistoryController {
+    
+    
     
     @Autowired
-    private UserService userservice;
+    private HistoryService hs;
     
-    @Autowired
-    private HistoryService service;
+    @RequestMapping("admin/history/{id}")
+    public List<History> getHistory(@PathVariable int id, Model model){
+        
+        List<History> history = new ArrayList<>();
+        
+        history = hs.getAllHistory(id);
+        
+        model.addAttribute("history",history);
+        
+        return hs.getAllHistory(id);
     
-    @RequestMapping("/profile")
-    public String ProfilePage(Model model, Principal principal){
-        
-        String username = principal.getName();
-        
-        User user = userservice.findByusername(username);
-        
-        model.addAttribute("history",service.findUserTask(user));
-        
-        return "profile";
     }
     
 }

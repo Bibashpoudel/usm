@@ -5,6 +5,7 @@
  */
 package com.example.demo;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +45,7 @@ public class UserController {
     @RequestMapping("/")
     public String home(){
         
-        return "index";
+        return "home";
     
     }
     
@@ -53,6 +55,13 @@ public class UserController {
     public String login(){
         
         return "login";
+    
+    }
+    //login form page
+    @RequestMapping("/home")
+    public String index(){
+        
+        return "user/index";
     
     }
     
@@ -65,13 +74,13 @@ public class UserController {
     public String Registerpage(Model model){
         User user = new User();
         
-        model.addAttribute("user", user);
+        model.addAttribute("user", user );
         
         return "register";
     }
     
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String Register(@ModelAttribute("user") User user, HttpServletRequest request){
+    public String Register(@ModelAttribute("user") User user, HttpServletRequest request, BindingResult result){
        
         
         if(service.findByusername(user.getUsername()) !=null){
@@ -139,40 +148,40 @@ public class UserController {
     }
     
     
+    @RequestMapping("/profile")
+    public String UserProfile(Model model , Principal principal) throws Exception{
+       
+        String username = principal.getName();
+        User users = service.findByusername(username);
+        
+        model.addAttribute("users", users);
+        
+        return "profile";
+    }
+    
+    //for admin
+    @RequestMapping("/registeradmin")
+    public String Registeradminpage(Model model){
+        User user = new User();
+        
+        model.addAttribute("user", user);
+        
+        return "admin/register";
+    }
+    
+    
+    @RequestMapping(value = "/saveadmin", method = RequestMethod.POST)
+    public String Registeradmin(@ModelAttribute("user") User user){
+       
+        
+        
+        
+        
+        service.CreateAdmin(user);
+        
+        
+        
+        return "redirect:/ ";
+    }
    
-    
-    
-    
-    
-    
-    
-    
-    
-    @RequestMapping("/edituser/{id}")
-    public ModelAndView Editpage(@PathVariable(name ="id")int id){
-        
-        ModelAndView  mv = new ModelAndView("edit");
-        
-        User user = service.get(id);
-        mv.addObject("user", user);
-        
-        return mv;
-        
-        
-    }
-    
-    @RequestMapping("/deleteuser/{id}")
-    public String DeleteUser(@PathVariable(name = "id")int id){
-        service.Delete(id);
-        
-        return "redirect:/listUser";
-    }
-    
-//    @RequestMapping("/active/{id}")
-//    public String Userblock(@PathVariable(name = "id")boolean active){
-//        service.Active(active);
-//        
-//        return "redirect:/listUser";
-//    }
-    
 }

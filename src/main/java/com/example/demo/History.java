@@ -32,7 +32,7 @@ public class History {
     private String descs;
     
     @Column(name = "user_id" )
-    private int userid;
+    private String userid;
 
     
 
@@ -72,11 +72,11 @@ public class History {
         this.descs = descs;
     }
 
-    public int getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
  

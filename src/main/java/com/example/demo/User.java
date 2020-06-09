@@ -60,6 +60,9 @@ public class User {
     public User(){
         
     }
+    public User(String username){
+        this.username= username;
+    }
 
     public User(String username, String password, boolean active, String roles) {
         this.username = username;
