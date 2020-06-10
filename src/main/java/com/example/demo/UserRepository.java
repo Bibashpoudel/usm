@@ -5,8 +5,10 @@
  */
 package com.example.demo;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -34,7 +36,8 @@ public interface UserRepository extends JpaRepository<User, Integer>{
     @Override
     public long count();
     
-    
+//    @Query("Select * from User where username = ?1")
+//    public User findUsername(String username);
    
     
     

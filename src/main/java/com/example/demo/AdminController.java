@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,20 +35,58 @@ public class AdminController {
     private HistoryService htrservice;
     
     
-    @GetMapping("")
+    @GetMapping("/")
     public String home(){
+       
+        
+        
         return "admin/dashboard";
     
     
     }
-    //list user
+    
+    
+    
+    //for admin registration
+    
+    
+    @RequestMapping("/registeradmin")
+    public String Registeradminpage(Model model){
+        User user = new User();
+        
+        model.addAttribute("user", user);
+        
+        return "admin/register";
+    }
+    
+    
+    
+    //create new auser
+    @RequestMapping(value = "/saveadmin", method = RequestMethod.POST)
+    public String Registeradmin(@ModelAttribute("user") User user, Model model){
+       
+        if(service.findByusername(user.getUsername()) !=null){
+            
+            model.addAttribute("error", "Already register");
+        
+            return "register";
+        
+        }else
+            
+         service.CreateAdmin(user);
+            
+        return "redirect:/admin";
+    
+        
+    }
+    
     
     
     @GetMapping("/listUser")
     public String UserList(Model model, HttpServletRequest request, String username){
         
        
-         List<User> listUser = service.ListUser();
+        List<User> listUser = service.ListUser();
          
         model.addAttribute ("listUser", listUser);
         
@@ -77,7 +116,7 @@ public class AdminController {
     @RequestMapping("/edituser/{id}")
     public ModelAndView Editpage(@PathVariable(name ="id")int id){
         
-        ModelAndView  mv = new ModelAndView("edit");
+        ModelAndView  mv = new ModelAndView("admin/edit");
         
         User user = service.get(id);
         mv.addObject("user", user);
@@ -92,5 +131,25 @@ public class AdminController {
         service.Delete(id);
         
         return "redirect:/admin/listUser";
+    }
+    
+    
+    ///updating user
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String Update(@ModelAttribute("user") User user, HttpServletRequest request, BindingResult result){
+       
+        
+        if(service.findByusername(user.getUsername()) !=null){
+            
+            request.setAttribute("error", "Already register");
+        return "redirect:/register";
+        
+        }
+        service.updateUser(user);
+            
+        return "redirect:/admin/listUser";
+        
+        
+        
     }
 }

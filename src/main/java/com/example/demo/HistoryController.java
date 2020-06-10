@@ -26,15 +26,15 @@ public class HistoryController {
     private HistoryService hs;
     
     @RequestMapping("admin/history/{id}")
-    public List<History> getHistory(@PathVariable int id, Model model){
+    public String getHistory(@PathVariable int id, Model model){
         
-        List<History> history = new ArrayList<>();
+        List<History> history = hs.getAllHistory(id);
         
-        history = hs.getAllHistory(id);
+        
         
         model.addAttribute("history",history);
         
-        return hs.getAllHistory(id);
+        return "admin/history";
     
     }
     

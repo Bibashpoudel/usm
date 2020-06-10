@@ -34,7 +34,7 @@ public class HistoryService {
     
 //        return repo.findAll();
 
-        List<History> history = new ArrayList<>();
+        
         
         
         return repo.findByuserid(id);

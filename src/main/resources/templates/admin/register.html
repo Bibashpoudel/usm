@@ -30,11 +30,8 @@ and open the template in the editor.
                         </li>
 
                         <li class="nav-item">
-                          <a class="nav-link " href="/register">create User</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link " href="/registeradmin">create Admin</a>
-                        </li>
+                      <a class="nav-link " href="/admin/registeradmin">create user</a>
+                    </li>
                         <li class="nav-item">
                       <a class="nav-link " href="/admin/listhistory">History</a>
                         </li>
@@ -55,8 +52,9 @@ and open the template in the editor.
                         <div th:if="${parm.logout">
                                 you have been logout
                         </div>-->
-                         <h2 style="margin-bottom: 2rem;text-align:center">Register New Admin</h2>
-                        <div class="form-group">
+                         <h2 style="margin-bottom: 2rem;text-align:center">Register New User</h2>
+                         <h2 style="margin-bottom: 2rem;text-align:center" th:text="${error}"></h2>
+                         <div class="form-group">
                             <label for="username">
                                 Username
                             </label >
@@ -64,6 +62,14 @@ and open the template in the editor.
                                    placeholder="username"/>
 
                         </div>
+                         <label for="roles">Choose User Type:</label>
+                            <select id="roles" name="roles">
+                              <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                              <option value="ROLE_USER">ROLE_USER</option>
+                            
+                            </select>
+                         
+                         
                         <div class="form-group">
                             <label for="password">
                                 Password

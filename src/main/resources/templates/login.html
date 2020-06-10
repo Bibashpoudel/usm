@@ -23,7 +23,8 @@ and open the template in the editor.
                 <div th:if="${parm.logout">
                         you have been logout
                 </div>-->
-                 <h2 style="margin-bottom: 2rem;text-align:center">Login</h2>
+                 <h2 style="margin-bottom: 2rem;text-align:center">Reset Password</h2>
+                 <h4 style="margin-bottom: 2rem;text-align:center"th:text="${error}"></h4>
                 <div class="form-group">
                     <label for="username">
                         Username
@@ -45,7 +46,7 @@ and open the template in the editor.
                      <button type="submit" class="btn btn-success">Log  in</button>
                     
                 </div>
-                 forgot password
+                 <a href="/forget" class="card-link">Forget Password</a>
                  <div style="text-align:center" class="login">
                      <div class="login-text">
                          Don't have Account ?

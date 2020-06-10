@@ -54,12 +54,19 @@ public class UserController {
     @RequestMapping("/login")
     public String login(){
         
+        
+        
+        
         return "login";
     
     }
     //login form page
     @RequestMapping("/home")
-    public String index(){
+    public String index(Principal principal, Model model ){
+        
+        String username= principal.getName();
+        
+        model.addAttribute("username", username);
         
         return "user/index";
     
@@ -80,12 +87,12 @@ public class UserController {
     }
     
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String Register(@ModelAttribute("user") User user, HttpServletRequest request, BindingResult result){
+    public String Register(@ModelAttribute("user") User user, Model model){
        
         
         if(service.findByusername(user.getUsername()) !=null){
             
-            request.setAttribute("error", "Already register");
+            model.addAttribute("error", "Already register");
         return "redirect:/register";
         
         }
@@ -95,6 +102,7 @@ public class UserController {
         
         
     }
+    
     
     
     @RequestMapping("/changePassword/{id}")
@@ -110,25 +118,25 @@ public class UserController {
         
     }
     //password changing
-    @RequestMapping(value = "/change", method = RequestMethod.POST)
-    public String Change(@ModelAttribute("user") User user, HttpServletRequest request, HttpServletResponse response){
-        
-       String pass1 = request.getParameter("password1");
-       
-        System.out.println(pass1);
-       
-       if(user.getPassword().equals(pass1)){
-           
-           service.changepassword(user);
-           
-           return "index";
-       }
-        
-        
-        return "redirect:/listuser";
-    }
+//    @RequestMapping(value = "/change", method = RequestMethod.POST)
+//    public String Change(@ModelAttribute("user") User user, HttpServletRequest request, HttpServletResponse response){
+//        
+//       String pass1 = request.getParameter("password1");
+//       
+//        System.out.println(pass1);
+//       
+//       if(user.getPassword().equals(pass1)){
+//           
+//           service.changepassword(user);
+//           
+//           return "index";
+//       }
+//        
+//        
+//        return "redirect:/listuser";
+//    }
     
-    //forget password cntroller
+    //forget password controller
      @RequestMapping("/forget")
     public String ForgetPassword(){
         
@@ -137,12 +145,20 @@ public class UserController {
         
         return "forgetpassword";
     }
-    @RequestMapping(value = "/saveme", method = RequestMethod.POST)
-    public String forgetpassword(@ModelAttribute("user") User user){
+    @RequestMapping(value = "/changepassword", method = RequestMethod.POST)
+    public String forgetpassword(@ModelAttribute("user") User user, Model model){
        
         
+         if(service.findByusername(user.getUsername()) == null){
+            
+            model.addAttribute("notmatch", "user name not match");
         
-       
+            return "forgetpassword";
+        
+        }
+         else
+             service.forgetPassword(user);
+             
         
         return "login";
     }

@@ -89,8 +89,8 @@ public class UserService implements UserDetailsService {
         
 //        
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setRoles("ROLE_ADMIN");
-        user.setActive(false);
+       
+        user.setActive(true);
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -114,9 +114,54 @@ public class UserService implements UserDetailsService {
         
     }
     
-    public void changepassword(User user){
+    
+    public void updateUser(User user ){
         
         
+        
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        
+        user.setPassword(encoder.encode(user.getPassword()));
+        user.setRoles("ROLE_USER");
+        user.setActive(true);
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date date = new Date();
+
+        String d = dateFormat.format(date);
+        
+        
+        History h1 = new History();
+        
+        h1.setCreated_date(d);
+        h1.setDescs("Update date");
+        user.setHistory(Arrays.asList(h1));
+        
+        
+        repo.save(user);
+        
+        
+    }
+    
+    public void forgetPassword(User user){
+        
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        
+        user.setPassword(encoder.encode(user.getPassword()));
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date date = new Date();
+
+        String d = dateFormat.format(date);
+        
+        
+        History h1 = new History();
+        
+        h1.setCreated_date(d);
+        h1.setDescs("password reset date");
+        user.setHistory(Arrays.asList(h1));
         
         repo.save(user);
         
@@ -161,6 +206,13 @@ public class UserService implements UserDetailsService {
         return repo.count();
     }
 
+//    public void findUsernames(String username){
+//        try{
+//         repo.findUsername(username);
+//        }catch(Exception e){
+//            System.out.println(e);
+//        }
+//    }
     
     
     

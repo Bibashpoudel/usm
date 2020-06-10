@@ -37,7 +37,7 @@ and open the template in the editor.
                 </div>
             </nav>
 <!--                <span th:text="${#authentication.getPrincipal().getUsername()}"></span>-->
-            <div class="card" style="width: 25rem;margin-left:auto;margin-right:auto;" th:each="user: ${user}">
+            <div class="card" style="width: 25rem;margin-left:auto;margin-right:auto;" th:each="user: ${users}">
                 <div class="card-body">
                   <h5 class="card-title" th:text="${user.id}">User Id</h5>
                   <h6 class="card-subtitle mb-2 text-muted" th:text="${user.username}">username</h6>

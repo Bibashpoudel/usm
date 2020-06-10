@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>User profile</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -30,7 +30,10 @@ and open the template in the editor.
                     </li>
 
                     <li class="nav-item">
-                      <a class="nav-link " href="/admin/registeradmin">create user</a>
+                      <a class="nav-link " href="/register">create User</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link " href="/registeradmin">create Admin</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link " href="/admin/listhistory">History</a>
@@ -45,9 +48,11 @@ and open the template in the editor.
             <div class="card" style="width: 25rem;margin-left:auto;margin-right:auto;" th:each="user: ${listUser}">
                 <div class="card-body">
                   <h5 class="card-title" th:text="${user.id}">User Id</h5>
-                   <a th:href="@{'/admin/edituser/' + ${user.id}}" class="card-link">
-                       <h6 class="card-subtitle mb-2 text-muted" th:text="${user.username}">UserName</h6>
-                   </a>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${user.username}">UserName</h6>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${user.firstname}">UserName</h6>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${user.lastname}">UserName</h6>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${user.contact}">UserName</h6>
+                  <h6 class="card-subtitle mb-2 text-muted" th:text="${user.roles}">UserName</h6>
                   <a th:href="@{'/admin/edituser/' + ${user.id}}" class="card-link">Edit User</a>
                   <a th:href="@{'/admin/deleteuser/' + ${user.id}}" class="card-link">Delete User</a>
                   <a th:href="@{'/admin/history/' + ${user.id}}" class="card-link">User History</a>

@@ -1,0 +1,119 @@
+ <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Edit User</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    
+    </head>
+    <body>
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">USM</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="/admin">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/admin/listUser">User List</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link " href="/admin/registeradmin">create user</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link " href="/admin/listhistory">History</a>
+                    </li>
+                  </ul>
+                  <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
+                   
+                    <button class="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+                  </form>
+                </div>
+            </nav>
+            <div style="width:600px;margin-left:auto;margin-right:auto;margin-top:5rem;padding:24px;background-color:lightgrey;
+                 border-radius:1rem">
+                <div card="card-block">
+                    <form action="#" th:action="@{/update}" method ="post" th:object="${user}">
+                       
+                         <h2 style="margin-bottom: 2rem;text-align:center">update Your Profile</h2>
+                        <div class="form-group">
+                            
+                            <h2 style="margin-bottom: .5rem;text-align:center" th:text="${error}"></h2>
+                            <label for="username">
+                                Username
+                            </label >
+                            <input type="text" class="form-control" th:field="*{username}"
+                                   placeholder="username"/>
+
+                        </div>
+                         <div class="form-group">
+                            
+                            
+                            <label for="FirstName">
+                                First Name
+                            </label >
+                            <input type="text" class="form-control" th:field="*{firstname}"
+                                   placeholder="First Name"/>
+
+                        </div>
+                         
+                         <div class="form-group">
+                            <label for="lastname">
+                                last Name
+                            </label >
+                            <input type="text" class="form-control" th:field="*{lastname}"
+                                   placeholder="Last Name"/>
+
+                        </div>
+                         
+                        <div class="form-group">
+                            <label for="contact">
+                                contact
+                            </label >
+                            <input type="tel" class="form-control" th:field="*{contact}"
+                                   placeholder="contact "/>
+
+                        </div>
+                         <div class="form-group">
+                            <label for="contact">
+                                contact
+                            </label >
+                            <input type="tel" class="form-control" th:field="*{contact}"
+                                   placeholder="contact "/>
+
+                        </div>
+                         <div class="form-action">
+
+                             <button type="submit" class="btn btn-success">Submit</button>
+
+                        </div>
+        <!--                 forgot password
+                         <div style="text-align:center" class="login">
+                             <div class="login-text">
+                                 Don't have Account ?
+                             </div>
+                             <a href="/register">Sign up</a>
+                         </div>-->
+
+
+
+                    </form>
+                </div>
+              </div>
+            
+        </div>
+    </body>
+</html>

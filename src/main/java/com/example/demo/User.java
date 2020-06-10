@@ -44,14 +44,13 @@ public class User {
     private boolean active;
     
     private String roles;
-    
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinColumn(name= "his_id")
-//    private History history;
+
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn( name = "user_id", referencedColumnName = "id")
     List<History> history = new ArrayList<>();
+
+    
 
     
     
@@ -122,7 +121,29 @@ public class User {
         this.history = history;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
 
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
     
     
     
